@@ -31,7 +31,7 @@ private val supplierContracts: String =
 var hackathonStatus: String = "Идет подготовка"
 
 // 9. Список спонсоров
-val sponsors: List<String> = emptyList()
+var sponsors: String = "Список спонсоров"
 
 // 10. Бюджет мероприятия
 private val eventBudget: Double = 100500.0
@@ -55,16 +55,16 @@ var teamsCount: Int = 0
     }
 
 // 14. Перечень задач
-val tasks: List<String> = emptyList()
+var tasks: String = "Перечень задач"
 
 // 15. План эвакуации
 val evacuationPlan: String = "План эвакуации мероприятия"
 
 // 16. Список доступного оборудования
-val availableEquipment: List<String> = emptyList()
+var availableEquipment: String = "Список оборудования"
 
 // 17. Список свободного оборудования
-val freeEquipment: List<String> = emptyList()
+var freeEquipment: String = "Список свободного оборудования"
 
 // 18. График питания участников
 lateinit var mealSchedule: String
@@ -73,13 +73,13 @@ lateinit var mealSchedule: String
 val contingencyPlan: String = "План действий при сбоях"
 
 // 20. Список экспертов и жюри
-val expertsAndJudges: List<String> = emptyList()
+var expertsAndJudges: String = "Список экспертов и жюри"
 
 // 21. Политика конфиденциальности
 val privacyPolicy: String = "Политика конфиденциальности мероприятия"
 
 // 22. Приватные отзывы участников и зрителей
-private val privateFeedback: List<String> = emptyList()
+private var privateFeedback: String = "Отзывы"
 
 // 23. Текущая температура в помещении
 var currentTemperature: Double = 20.0
@@ -107,7 +107,7 @@ var lightingLevel: Int = 0
     }
 
 // 27. Лог событий мероприятия
-val eventLog: MutableList<String> = mutableListOf()
+var eventLog: String = "События мероприятия"
 
 // 28. Возможность получения медицинской помощи
 val medicalAssistanceAvailable: Boolean = true
@@ -140,7 +140,7 @@ var permitsStatus: String = "В процессе"
 var specializedEquipmentAvailable: Boolean = false
 
 // 37. Список партнеров мероприятия
-val partners: List<String> = emptyList()
+var partners: String = "Список партнеров"
 
 // 38. Отчёт, доступный после завершения мероприятия
 val eventReport: String by lazy {
@@ -152,7 +152,7 @@ private val prizeDistributionRules: String =
     "Внутренние правила распределения призов"
 
 // 40. Список разыгрываемых призов
-val prizes: List<String> = emptyList()
+val prizes: String = "Список призов"
 
 // 41. Контакты экстренных служб и медицинского персонала
 private val emergencyContacts: String =

@@ -143,9 +143,9 @@ var specializedEquipmentAvailable: Boolean = false
 var partners: String = "Список партнеров"
 
 // 38. Отчёт, доступный после завершения мероприятия
-val eventReport: String by lazy {
-    generateEventReport()
-}
+//val eventReport: String by lazy {
+//    generateEventReport()
+//}
 
 // 39. Внутренние правила распределения призов
 private val prizeDistributionRules: String =
@@ -163,9 +163,9 @@ val accessibilityRequirements: String =
     "Особые условия для участников с ограниченными возможностями"
 
 // 43. Общее настроение участников
-val participantsMood: String by lazy {
-    calculateParticipantsMood()
-}
+//val participantsMood: String by lazy {
+//    calculateParticipantsMood()
+//}
 
 // 44. Подробный план хакатона
 lateinit var hackathonPlan: String

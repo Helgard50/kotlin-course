@@ -11,7 +11,7 @@ import kotlin.text.lowercase
 //    example("Этот код работает без проблем")
 //    example("Удача")
 //}
-////
+//
 //fun example(phrase: String) {
 //    val result = when {
 //        phrase.contains("невозможно") -> phrase.replace("невозможно", "совершенно точно возможно, просто требует времени")
@@ -78,6 +78,20 @@ import kotlin.text.lowercase
 //    }
 //
 //    println(abbreviation)
+//}
+
+//7. Все слова с большой буквы
+//fun capitalLizeWords(input: String) {
+//    val words = input.split(" ")
+//    var result = ""
+//
+//    for (word in words) {
+//        if (input.isEmpty()) continue
+//
+//        result += word[0].uppercase()
+//        result += word.substring(1).lowercase()
+//    }
+//    println(result.trim())
 //}
 
 

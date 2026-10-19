@@ -13,6 +13,11 @@ val mapSeven = mapOf<String, String>("/endpoint1" to "200 OK", "/endpoint2" to "
 val mapEight = mapOf<String, Int>("service1" to 120, "service2" to 200, "service3" to 650, "service4" to 1050)
 val mapNine = mapOf<String, String>("name1" to "configuration1", "name2" to "configuration2", "name3" to "configuration3")
 val mapTen = mapOf<String, String>("OS1" to "MacOs", "OS2" to "Windows")
+val mapEleven = mapOf<String, Double>("device1" to 1.2, "device2" to 2.1, "device3" to 1.6)
+val mapTwelve = mapOf<String, String>("TestID_1" to "Passed", "TestID_2" to "Failed", "TestID_3" to "Skipped")
+val map13 = mapOf<Int, String>(200 to "OK", 404 to "Not Found", 500 to "Internal Server Error", 502 to "Bad Gateway")
+val mapSettings1 = mutableMapOf<Int, String>(1 to "settings1", 2 to "settings2", 3 to "settings1")
+val mapSettings2 = mutableMapOf<Int, String>(4 to "settings3", 5 to "settings5")
 
 fun averageTestTime() {
     val averageTime = mapOne.values.average()
@@ -74,6 +79,36 @@ fun addNewOS() {
     println(newMap)
 }
 
+//11
+fun defaultSettings() {
+    val default = mapEleven.getOrDefault("device4", "1.0")
+    println(default)
+}
+
+//12
+fun errorCod() {
+    val result = map13.containsKey(400)
+    println(result)
+}
+
+//13
+fun filterTestId() {
+    val needTestID = mapTwelve.filterKeys { it.endsWith("1") }
+    println(needTestID)
+}
+
+//14
+fun failedTest() {
+    val result = mapTwelve.containsValue("Failed")
+    println(result)
+}
+
+//15
+fun putToMap() {
+    mapSettings1.putAll(mapSettings2)
+    println(mapSettings1)
+}
+
 fun main() {
 //    println(averageTestTime())
 //    println(allKeyMap())
@@ -84,5 +119,10 @@ fun main() {
 //    println(apiFunction())
 //    println(timeService())
 //    println(configurationFun())
-    println(addNewOS())
+//    println(addNewOS())
+//    println(defaultSettings())
+//    println(filterTestId())
+//    println(errorCod())
+//    println(failedTest())
+//    println(putToMap())
 }

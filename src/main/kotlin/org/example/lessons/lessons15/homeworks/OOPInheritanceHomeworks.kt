@@ -180,48 +180,14 @@ abstract class Materials {
     }
 }
 
-class InsertFirstMaterial : Materials() {
-    fun insert(item: String) {
-        val materials = extractMaterials()
-        addMaterial(item)
-        materials.forEach {
-            addMaterial(it)
-        }
+class StackMaterials : Materials() {
+    override fun addMaterial(material: String) {
+        materials.add(material)
     }
 }
 
-class InsertOneByOneMaterials : Materials() {
-
-    fun insert(items: List<String>) {
-        val materials = extractMaterials()
-        for (i in items.indices) {
-            addMaterial(items[i])
-            if (i < materials.size) {
-                addMaterial(materials[i])
-            }
-        }
-        for (i in items.size until materials.size) {
-            addMaterial(materials[i])
-        }
-    }
-}
-
-class InsertSortedMaterials : Materials() {
-
-    fun insert(item: String) {
-        val materials = (extractMaterials() + item).sorted()
-        materials.forEach {
-            addMaterial(it)
-        }
-    }
-}
-
-class InsertMapMaterials : Materials() {
-
-    fun insert(items: Map<String, String>) {
-        val materials = items.keys.reversed() + extractMaterials() + items.values
-        materials.forEach {
-            addMaterial(it)
-        }
+class QueueMaterials : Materials() {
+    override fun addMaterial(material: String) {
+        materials.add(0, material)
     }
 }

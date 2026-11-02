@@ -1,5 +1,6 @@
 package org.example.lessons.lessons16.homeworks
 
+import jdk.jfr.DataAmount
 import kotlin.math.PI
 import kotlin.math.sin
 
@@ -20,6 +21,22 @@ fun main() {
     for (item in list) {
         println(item.area())
     }
+    val text = "Text1" +
+            "Text2" +
+            "Text3"
+
+    val laserPrinter = LaserPrinter()
+    val inkjetPrinter = InkjetPrinter()
+
+    laserPrinter.printPage(text)
+    inkjetPrinter.printPage(text)
+
+    val shoppingCart = ShoppingCart()
+    shoppingCart.addToCart(678)
+    shoppingCart.addToCart(101, 101)
+    shoppingCart.addToCart(mapOf(202 to 2, 303 to 3))
+    shoppingCart.addToCart(listOf(401, 404, 505))
+    println(shoppingCart)
 }
 
 object Colors {
@@ -131,5 +148,48 @@ class InkjetPrinter(): Printer() {
             println("${color}$item ${ColorsPrinter.RESET}")
         }
         println()
+    }
+}
+
+//
+class ShoppingCart {
+    private val items = mutableMapOf<Int, Int>()
+
+    fun addToCart(itemsId: Int) {
+        val amount = items[itemsId]
+        if (amount == null) {
+            items[itemsId] = 1
+        } else {
+            items[itemsId] = amount + 1
+        }
+    }
+
+    fun addToCart(itemsId: Int, amount: Int) {
+        for (i in 1 .. amount) {
+            addToCart(itemsId)
+        }
+    }
+
+    fun addToCart(items: Map<Int, Int>) {
+        for (product in items) {
+            addToCart(product.key, product.value)
+        }
+    }
+
+    fun addToCart(items: List<Int>) {
+        for (product in items) {
+            addToCart(product)
+        }
+    }
+
+    override fun toString(): String {
+        var cartText = "Корзина товаров: \n"
+        var cartArticle = "Итоговое количество артикулов: ${items.size}\n"
+        var cartSum = "Общее количество товаров в корзине: ${items.values.sum()}"
+
+        for (product in items) {
+            cartText += "${product.key} | ${product.value}\n"
+        }
+        return cartText + cartArticle + cartSum
     }
 }

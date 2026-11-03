@@ -37,6 +37,20 @@ fun main() {
     shoppingCart.addToCart(mapOf(202 to 2, 303 to 3))
     shoppingCart.addToCart(listOf(401, 404, 505))
     println(shoppingCart)
+
+    val logger = Logger()
+    logger.log("Приложение запущено")
+    logger.log("WARNING", "Заканчивается память")
+    logger.log("ERROR", "Ошибка авторизации")
+    logger.log("DEBUG", "Проверяем соединение")
+    logger.log(
+        listOf(
+            "Пользователь вошел",
+            "Загружен профиль",
+            "Получен список полисов"
+        )
+    )
+    logger.log(Exception("Нет соединения с сервером"))
 }
 
 object Colors {
@@ -191,5 +205,37 @@ class ShoppingCart {
             cartText += "${product.key} | ${product.value}\n"
         }
         return cartText + cartArticle + cartSum
+    }
+}
+
+//
+object Prefix {
+    const val RESET = "\u001B[0m"
+    const val YELLOW = "\u001B[33m"
+    const val WHITE_ON_RED = "\u001B[37;41m"
+}
+
+class Logger {
+    fun log(message: String) {
+        println("[INFO] $message")
+    }
+    fun log(level: String, message: String) {
+        when (level) {
+            "WARNING" -> {
+                println("${Prefix.YELLOW}{WARNING} $message${Prefix.RESET}")
+            }
+            "ERROR" -> {
+                println("${Prefix.WHITE_ON_RED}{ERROR} $message${Prefix.RESET}")
+            }
+            else -> {
+                println("[$level] $message")
+            }
+        }
+    }
+    fun log(messages: List<String>) {
+        messages.forEach{ log(it) }
+    }
+    fun log(error: Exception) {
+        log("ERROR", error.message ?: "Неизвестная ошибка")
     }
 }

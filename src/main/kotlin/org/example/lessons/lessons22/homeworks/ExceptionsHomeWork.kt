@@ -3,62 +3,91 @@ package org.example.lessons.lessons22.homeworks
 fun main() {
 //Задание 1:
     try {
-        null!!
+        val str: String? = null
+        println(str!!.length)
     } catch (e: NullPointerException) {
-        println("It is NullPointerException! \uD83C\uDF89")
+        println("Пойман NullPointerException: ${e.message}")
     }
 //Задание 2:
     try {
-        listOf("")[1]
+        val list = listOf(1, 2, 3)
+        println(list[5])
     } catch (e: IndexOutOfBoundsException) {
-        println("It is IndexOutOfBoundsException! \uD83C\uDF89")
+        println("Пойман IndexOutOfBoundsException: ${e.message}")
     }
 //Задание 3:
     try {
-        "" as Int
+        val obj: Any = "строка"
+        val num = obj as Int
+        println(num)
     } catch (e: ClassCastException) {
-        println("It is ClassCastException! \uD83C\uDF89")
+        println("Пойман ClassCastException: ${e.message}")
     }
 //Задание 4:
     try {
-        require(false)
+        setAge(-5)
     } catch (e: IllegalArgumentException) {
-        println("It is IllegalArgumentException! \uD83C\uDF89")
+        println("Пойман IllegalArgumentException: ${e.message}")
     }
 //Задание 5:
     try {
-        "".toInt()
+        val s = "abc"
+        val n = s.toInt()
+        println(n)
     } catch (e: NumberFormatException) {
-        println("It is NumberFormatException! \uD83C\uDF89")
+        println("Пойман NumberFormatException: ${e.message}")
     }
 //Задание 6:
     try {
-        check(false)
+        val c = Connection()
+        c.send("hello")
     } catch (e: IllegalStateException) {
-        println("It is IllegalStateException! \uD83C\uDF89")
+        println("Пойман IllegalStateException: ${e.message}")
     }
 //Задание 7:
     try {
-        (0..Long.MAX_VALUE).map { Long.MAX_VALUE }
+        val list = mutableListOf<ByteArray>()
+        while (true) {
+            list.add(ByteArray(10_000_000))
+        }
     } catch (e: OutOfMemoryError) {
-        println("It is OutOfMemoryError! \uD83C\uDF89")
+        println("Пойман OutOfMemoryError: ${e.message}")
     }
 //Задание 8:
     try {
-        a()
+        recursive(0)
     } catch (e: StackOverflowError) {
-        println("It is StackOverflowError! \uD83C\uDF89")
+        println("Пойман StackOverflowError: ${e.message}")
     }
 //Задание 11:
-//    throw MyAssertionError("Алярм!!")
+//    val message = "Проверка провалена: условие не выполнено"
+//    throw MyAssertionError(message)
 //Задание 12:
     try {
-        listOf("")[1]
+        val list = listOf(1, 2, 3)
+        println(list[10])  // провоцируем IndexOutOfBoundsException
     } catch (e: IndexOutOfBoundsException) {
-        println("Произошёл IndexOutOfBoundsException")
-        throw MyRuntimeException(e)
+        println("Поймано IndexOutOfBoundsException: ${e.message}")
+        throw MyRuntimeException(e)  // оборачиваем и бросаем свой тип
     }
 }
+//Задание 4:
+fun setAge(age: Int) {
+    require(age >= 0) { "Возраст не может быть отрицательным" }
+}
+
+//Задание 6:
+class Connection {
+    private var isOpen = false
+    fun open() { isOpen = true }
+    fun send(data: String) {
+        check(isOpen) { "Соединение не открыто" }
+        println("Отправка: $data")
+    }
+}
+
+//Задание 8:
+fun recursive(n: Int): Int = recursive(n + 1)
 
 //Задание 9:
 fun a() {
@@ -66,27 +95,31 @@ fun a() {
 }
 
 //Задание 10:
-fun catchable(arg: Any?) {
+fun processArgument(arg: Any?) {
     try {
-        arg!!
-        arg as List<*>
-        arg[2]
-        require(arg[2] is String)
-        check((arg[2] as String).toInt() == 3)
+        val length = arg!!.toString().length
+        println("Длина строки: $length")
+        val list = listOf(1, 2, 3)
+        println("Элемент по индексу 10: ${list[10]}")
+        val number = arg as Int
+        println("Число: $number")
+        require(number > 0) { "Число должно быть положительным" }
+        val parsed = "не число".toInt()
+        println("Распарсили: $parsed")
+        check(false) { "Объект находится в недопустимом состоянии" }
+        println("Переданный аргумент фантастически хорош!")
     } catch (e: Throwable) {
-        val result = when (e) {
-            is NullPointerException -> "It is NullPointerException"
-            is ClassCastException -> "It is ClassCastException"
-            is IndexOutOfBoundsException -> "It is IndexOutOfBoundsException"
-            is NumberFormatException -> "It is NumberFormatException"
-            is IllegalArgumentException -> "It is IllegalArgumentException"
-            is IllegalStateException -> "It is IllegalStateException"
-            else -> "It is unknown exception"
+        when (e) {
+            is NullPointerException     -> println("Поймано исключение: NullPointerException")
+            is IndexOutOfBoundsException -> println("Поймано исключение: IndexOutOfBoundsException")
+            is ClassCastException       -> println("Поймано исключение: ClassCastException")
+            is IllegalArgumentException -> println("Поймано исключение: IllegalArgumentException")
+            is NumberFormatException    -> println("Поймано исключение: NumberFormatException")
+            is IllegalStateException    -> println("Поймано исключение: IllegalStateException")
+            else                        -> println("Поймано неизвестное исключение: ${e::class.simpleName}")
         }
-        println(result)
         throw e
     }
-    println("We have a fantastically good argument!")
 }
 
 //Задание 11:
